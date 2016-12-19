@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-chicken-store",
+  "version": "1.0.0",
+  "description": "REST service for the Chicken data model and meta",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhale/chicken-scratch.git"
+  },
+  "keywords": [
+    "nodejs",
+    "microservice",
+    "rest"
+  ],
+  "author": "Nick Hale <NJohnHale@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nhale/chicken-scratch/issues"
+  },
+  "homepage": "https://github.com/nhale/chicken-scratch#readme"
+}
