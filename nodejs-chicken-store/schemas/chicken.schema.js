@@ -1,4 +1,4 @@
-// chicken.js
+// chicken.schema.js
 
 var Schema = require('mongoose').Schema;
 

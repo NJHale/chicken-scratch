@@ -1,24 +1,17 @@
 // server.js
 
 // Require appropriate modules
-var fs = require('fs');
-var app = require('express')();
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-
-var ChickenSchema = require('chicken');
+var express = require('express');
 
 // Get the config object
 var config = require('./config');
 
-// Create a new express middleware router
-var router = express.Router();
+// Instantiate the app object and wire the app routes
+var app = express();
+// ./routes/index.js is the default code to be hit
+var appRoutes = require('./routes');
 
-/**
- * Health route for OpenShift
- */
-router.get('/', (req, res) => {
-
+// Begin listening on the configured port
+app.listen(config.port, () => {
+  console.log('nodejs-chicken-store running on ' + process.env.APP_POD_NAME);
 });
-
-// Register all routes with d

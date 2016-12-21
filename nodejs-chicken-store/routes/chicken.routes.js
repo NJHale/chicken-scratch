@@ -1,10 +1,10 @@
 // chicken.routes.js
 
-// Require routesropriate modules
+// Require appropriate modules
 var express = require('express');
 var mongoose = require('mongoose');
 
-var ChickenSchema = require('../schemas/chicken').ChickenSchema;
+var ChickenSchema = require('../schemas/chicken.schema').ChickenSchema;
 
 // Get the configuration object
 var config = require('../config');
@@ -37,7 +37,7 @@ routes.get('/chickens', (req, res) => {
 
     console.log(`This is the number of results to retrieve: ${num}`);
     // Perform a find all with mongoose
-    Chicken.find((err, pkgs) => {
+    Chicken.find((err, ckns) => {
       // Check for an error case
       if (err != null) {
         console.log(`An error was detected when getting the chickens: ${err}`);
@@ -45,7 +45,7 @@ routes.get('/chickens', (req, res) => {
         res.status(400).json(err);
       } else {
         // Change status to 200 "OK" and chicken the json response
-        res.status(200).json(pkgs);
+        res.status(200).json(ckns);
       }
     }).limit(Number(num));
   } catch (ex) {
@@ -55,15 +55,13 @@ routes.get('/chickens', (req, res) => {
 });
 
 /**
- * Chicken endpoint for getting the latest pkges
+ * Chicken endpoint for getting the latest cknes
  * @type {Boolean}
  */
 routes.get('/chickens/latest', (req, res) => {
   try {
-
     // Get the number of elements to retrieve - null should be 0 to get all
     var num = req.query.num == null ? 0 : req.query.num;
-
 
     LatestChicken.find((err, chickens) => {
       // Check for an error case
@@ -73,70 +71,9 @@ routes.get('/chickens/latest', (req, res) => {
         res.status(400).json(err);
       } else {
         // Change status to 200 "OK" and chicken the json response
-        res.status(200).json(chicken);
+        res.status(200).json(chickens);
       }
     })
-
-    // Instantiate the map reduce function in an object
-    var mapReduce = {};
-    // Create the map function (pkgId -> pkg)
-    mapReduce.map = function() {
-      emit(this.name, this);
-    }
-    // Create the reduce function (Only return the latest pkg objects)
-    mapReduce.reduce = function(name, chickens) {
-      // Iterate through the pkges, searching for the latest pkg
-      var latest = chickens[chickens.length - 1];
-      // We can skip the first box
-      // for (var i = 1; i < pkgs.length; i++) {
-      //   if (pkgs[i].time > latest.time) {
-      //     latest = pkgs[i];
-      //   }
-      // }
-
-      // Return the latest pkg
-      return latest;
-    }
-
-    // Perform a find all with mongoose
-    Chicken.mapReduce(mapReduce, (err, reduction) => {
-      try {
-        console.log(`Well, we made it past the map reduce: ${JSON.stringify(reduction)}`);
-        // Check for an error case
-        if (err) {
-          console.log(`An error was detected when getting the latest pkges:
-            ${err}`);
-          // Return an error
-          res.status(400).json(err);
-        } else {
-          // Check for query parameter idLike
-          var idLike = req.query.idLike;
-          var regex = new RegExp(`^${idLike}`, 'g');
-          // Collect each value from the id-value tuples in the reduction array
-          var pkgs = [];
-          for (r of reduction) {
-            if (r.value.name != null) {
-              if (idLike) {
-                // Check for pattern matching before pushing in pkg
-                var strId = (r.value.pkgId).toString();
-                if (strId.match(regex)) {
-                  pkgs.push(r.value);
-                }
-              } else {
-                pkgs.push(r.value);
-              }
-            }
-          }
-          // Change status to 200 "OK" and chicken the json response
-          res.status(200).json(pkgs);
-        }
-      } catch (err) {
-          // Set and send status 500 "Internal Server Error"
-          res.status(400).json(JSON.stringify(err));
-      }
-
-    });
-
   } catch (err) {
       // Set and send status 500 "Internal Server Error"
       res.status(500).json(JSON.stringify(err));
@@ -147,17 +84,17 @@ routes.get('/chickens/latest', (req, res) => {
  * Chickens endpoint for getting all Chickens of a particular id
  * @type {Boolean}
  */
-routes.get('/chickens/:pkgId', (req, res) => {
+routes.get('/chickens/:name', (req, res) => {
   try {
-    var pkgId = req.params.pkgId;
-    console.log(`This is the id we got! pkgId: ${pkgId}`);
+    var name = req.params.name;
+    console.log(`This is the id we got! name: ${name}`);
     // Get the number of elements to retrieve - null should be 0 to get all
     var num = req.query.num == null ? 0 : req.query.num;
     console.log(`This is the number of results to retrieve: ${num}`);
-    // Make sure we were given a pkgId to query
-    if (pkgId) {
-      // Perform a find on the pkgId
-      Chicken.find({ pkgId: pkgId }, (err, pkgs) => {
+    // Make sure we were given a name to query
+    if (name) {
+      // Perform a find on the name
+      Chicken.find({ name: name }, (err, ckns) => {
         // Check for an error case
         if (err != null) {
           console.log(`An error was detected when getting the chickens: ${err}`);
@@ -165,12 +102,12 @@ routes.get('/chickens/:pkgId', (req, res) => {
           res.status(400).json(err);
         } else {
           // Change status to 200 "OK" and chicken the json response
-          res.status(200).json(pkgs);
+          res.status(200).json(ckns);
         }
       }).sort({ time: 'descending' }).limit(Number(num));
     } else {
       // Set and send status 400 "Bad Request"
-      res.status(400).send('A pkgId parameter must be provided.');
+      res.status(400).send('A name parameter must be provided.');
     }
   } catch (ex) {
     console.log(ex);
@@ -185,11 +122,11 @@ routes.post('/chickens', (req, res) => {
   // The request should be able to be cast to type Chicken
   try {
     // Instantiate a new Chicken with given json
-    var pkg = new Chicken(req.body);
-    console.log('Finalized chicken: ' + JSON.stringify(pkg));
+    var ckn = new Chicken(req.body);
+    console.log('Finalized chicken: ' + JSON.stringify(ckn));
     // Insert the Chicken into the store
     //TODO: Add type checking to ensure we are putting in our base Chicken prototype (at least)
-    pkg.save((err, pkg) => {
+    ckn.save((err, ckn) => {
       if (err != null) {
         console.log(`An error was detected when saving the chicken: ${err}`)
         // Return an error
@@ -205,7 +142,7 @@ routes.post('/chickens', (req, res) => {
     // The user's request was bad - send 400 "Bad Request"
     res.status(400).json(JSON.stringify(e));
   }
-})
+});
 
 /**
  * Performs a map-reduce on the chicken collection and stores the result
@@ -214,23 +151,23 @@ routes.post('/chickens', (req, res) => {
 function reduceChickens() {
   // Instantiate the map reduce function in an object
   var mapReduce = {};
-  // Create the map function (pkgId -> pkg)
+  // Create the map function (name -> ckn)
   mapReduce.map = function() {
     emit(this.name, this);
   }
-  // Create the reduce function (Only return the latest pkg objects)
+  // Create the reduce function (Only return the latest ckn objects)
   mapReduce.reduce = function(name, chickens) {
     // Iterate through the chickens, searching for the latest chicken
     // We're assuming it was a min heap (implemented as array it would be at the last index)
     var latest = chickens[chickens.length - 1];
     // We can skip the first box
-    // for (var i = 1; i < pkgs.length; i++) {
-    //   if (pkgs[i].time > latest.time) {
-    //     latest = pkgs[i];
+    // for (var i = 1; i < ckns.length; i++) {
+    //   if (ckns[i].time > latest.time) {
+    //     latest = ckns[i];
     //   }
     // }
 
-    // Return the latest pkg
+    // Return the latest ckn
     return latest;
   }
 
@@ -246,7 +183,7 @@ function reduceChickens() {
         // Collect each value from the id-value tuples in the reduction array
         var latest = [];
         for (r of reduction) {
-          latest.push(r.value);
+          latest.push(new LatestChicken(r.value));
         }
         // Delete everything in the latestchicken collection
         LatestChicken.remove({}, (err) {
@@ -255,9 +192,8 @@ function reduceChickens() {
               from the latestchicken collection\n${err}`);
           }
           // Attempt to add the new latest to the collection
-          for (l of latest) {
-            var chicken = new LatestChicken(l);
-            LatestChicken.save();
+          for (chicken of latest) {
+            chicken.save();
           }
 
           console.log('Map-reduce completed!');
@@ -271,3 +207,6 @@ function reduceChickens() {
 
   });
 }
+
+// Export the routes as an unnamed object
+module.exports = routes;
