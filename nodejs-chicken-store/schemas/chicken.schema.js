@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-function ChickenSchema = mongoose.Schema({
+var ChickenSchema = mongoose.Schema({
   name: {
     type: String,
     index: true
@@ -11,7 +11,7 @@ function ChickenSchema = mongoose.Schema({
   nickName: String,
   date: {
     type: Date,
-    default: Date.now 
+    default: Date.now
   },
 });
 
