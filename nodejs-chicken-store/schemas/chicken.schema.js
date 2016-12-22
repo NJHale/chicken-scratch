@@ -3,12 +3,12 @@
 var mongoose = require('mongoose');
 
 var ChickenSchema = mongoose.Schema({
-  name: {
+  chickenName: {
     type: String,
     index: true
   },
   email: String,
-  nickName: String,
+  chickonym: String,
   date: {
     type: Date,
     default: Date.now
