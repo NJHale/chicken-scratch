@@ -3,6 +3,8 @@
 // Require appropriate modules
 var express = require('express');
 
+var bodyParser = require('body-parser');
+
 // Get the configuration object
 var config = require('../config');
 

@@ -3,6 +3,7 @@
 // Require appropriate modules
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 var ChickenSchema = require('../schemas/chicken.schema').ChickenSchema;
 
