@@ -24,9 +24,9 @@ routes.use('/', chickenRoutes);
 // Define a default health path at /
 routes.get('/', (req, res) => {
   try {
-    console.log('nodejs-package-store running on ' + process.env.APP_POD_NAME);
+    console.log('nodejs-chicken-store running on ' + process.env.APP_POD_NAME);
     // Return a 200 'OK'
-    res.status(200).send(`nodejs-package-store running on ${process.env.APP_POD_NAME}`);
+    res.status(200).send(`nodejs-chicken-store running on ${process.env.APP_POD_NAME}`);
   } catch (err) {
     console.log(`Something went wrong while responding to readiness check at /: ${err}`);
   }
