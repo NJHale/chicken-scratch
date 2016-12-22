@@ -1,12 +1,18 @@
 // chicken.schema.js
 
-var Schema = require('mongoose').Schema;
+var mongoose = require('mongoose');
 
-function ChickenSchema = Schema({
-  name: { type: String, index: true }
+function ChickenSchema = mongoose.Schema({
+  name: {
+    type: String,
+    index: true
+  }
   email: String,
   nickName: String,
-  date: { type: Date, default: Date.now },
+  date: {
+    type: Date,
+    default: Date.now 
+  },
 });
 
 exports.ChickenSchema = ChickenSchema;
