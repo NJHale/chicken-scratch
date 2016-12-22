@@ -186,8 +186,8 @@ function reduceChickens() {
           latest.push(new LatestChicken(r.value));
         }
         // Delete everything in the latestchicken collection
-        LatestChicken.remove({}, (err) {
-          if (err) {
+        LatestChicken.remove({}, (err) => {
+          if(err) {
             console.log(`An error occured while attempting to remove all elements
               from the latestchicken collection\n${err}`);
           }
@@ -195,10 +195,8 @@ function reduceChickens() {
           for (chicken of latest) {
             chicken.save();
           }
-
           console.log('Map-reduce completed!');
         });
-
       }
     } catch (err) {
       console.log(`An error was detected when updating the latestchicken collection
