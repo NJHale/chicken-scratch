@@ -10,7 +10,6 @@ var config = require('./config');
 var app = express();
 // ./routes/index.js is the default code to be hit
 var appRoutes = require('./routes');
-
 app.use(appRoutes);
 
 // Begin listening on the configured port

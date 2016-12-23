@@ -40,5 +40,8 @@ config.mongoOptions = {
     config: { autoIndex: false }
 };
 
+// Set reductionDT
+config.reductionDT = process.env.REDUCTION_DT || 1000;
+
 // Export the config object as unnamed
 module.exports = config;

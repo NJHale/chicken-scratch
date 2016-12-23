@@ -150,6 +150,8 @@ routes.post('/chickens', (req, res) => {
  * in the latestchicken collection
  */
 function reduceChickens() {
+  // Set reducing to true
+  this.reducing = true;
   // Instantiate the map reduce function in an object
   var mapReduce = {};
   // Create the map function (name -> ckn)
@@ -178,6 +180,8 @@ function reduceChickens() {
       console.log(`Map reduce reduction: ${JSON.stringify(reduction)}`);
       // Check for an error case
       if (err) {
+        // Set reducing to false
+        this.reducing = false;
         console.log(`An error was detected when performing a map-reduce
           ${err}`);
       } else {
@@ -196,16 +200,35 @@ function reduceChickens() {
           for (chicken of latest) {
             chicken.save();
           }
+          // Set reducing to false
+          this.reducing = false;
           console.log('Map-reduce completed!');
         });
       }
     } catch (err) {
+      // Set reducing to false
+      this.reducing = false;
       console.log(`An error was detected when updating the latestchicken collection
         ${err}`);
     }
 
   });
 }
+
+// Define the requested and reducing flags on the reduceChickens function
+reduceChickens.requested = false;
+reduceChickens.reducing = false
+
+// Create an interval for the chickens to be reduced on
+var reductionInterval = interval(config.reductionDT, () => {
+  // Check if a reduce has been requested and one is not currently running
+  if (reduceChickens.requested && !reduceChickens.reducing) {
+    // Set requested to false
+    reduceChickens.requested = false;
+    // Reduce the chickens
+    reduceChickens();
+  }
+});
 
 // Export the routes as an unnamed object
 module.exports = routes;

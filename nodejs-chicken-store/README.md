@@ -1,9 +1,15 @@
-nodejs-chicken-store
+# nodejs-chicken-store
+
 
 Simple REST service for chickens and accompanying models
 
-OpenShift templates used:
-  ../infrastructure/web-app-template.yml
+## Docker Image
 
-Docker base-image:
-  docker.io/node:latest - as of 12/16/2016
+
+A Docker container image for this service can be built by issuing a
+`docker build ../nodejs-chicken-store` from the root git repository
+
+## Deployment on OpenShift
+
+OpenShift templates used:
+  `../infrastructure/web-app-template.yml`
