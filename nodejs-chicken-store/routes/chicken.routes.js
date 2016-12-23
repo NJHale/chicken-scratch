@@ -220,7 +220,7 @@ reduceChickens.requested = false;
 reduceChickens.reducing = false
 
 // Create an interval for the chickens to be reduced on
-var reductionInterval = interval(config.reductionDT, () => {
+var reductionInterval = setInterval(() => {
   // Check if a reduce has been requested and one is not currently running
   if (reduceChickens.requested && !reduceChickens.reducing) {
     // Set requested to false
@@ -228,7 +228,7 @@ var reductionInterval = interval(config.reductionDT, () => {
     // Reduce the chickens
     reduceChickens();
   }
-});
+}, config.reductionDT);
 
 // Export the routes as an unnamed object
 module.exports = routes;
