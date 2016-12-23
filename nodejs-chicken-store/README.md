@@ -11,7 +11,7 @@ A Docker container image for this service can be built by issuing a
 
 ## Deployment on OpenShift
 
-This template can be added to a project by running `oc create -f ../infrastructure/web-app-ephemeral-mongo-template.yml` from the subdirectory of
+The template for this microservice can be added to a project by running `oc create -f ../infrastructure/web-app-ephemeral-mongo-template.yml` from the subdirectory of
 this microservice relative to the chicken-scratch project's root.
 
 
