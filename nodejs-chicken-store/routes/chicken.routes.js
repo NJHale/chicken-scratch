@@ -223,6 +223,8 @@ reduceChickens.reducing = false
 var reductionInterval = setInterval(() => {
   // Check if a reduce has been requested and one is not currently running
   if (reduceChickens.requested && !reduceChickens.reducing) {
+    console.log(`Reduction request detected
+      \nKicking off new reduction at ${Date.now()}`);
     // Set requested to false
     reduceChickens.requested = false;
     // Reduce the chickens
