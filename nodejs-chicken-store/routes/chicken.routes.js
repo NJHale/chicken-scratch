@@ -221,15 +221,19 @@ reduceChickens.reducing = false
 
 // Create an interval for the chickens to be reduced on
 var reductionInterval = setInterval(() => {
+  console.log('Checking for reduction requests...')
   // Check if a reduce has been requested and one is not currently running
   if (reduceChickens.requested && !reduceChickens.reducing) {
-    console.log(`Reduction request detected
+    console.log(`Reduction request detected!
       \nKicking off new reduction at ${Date.now()}`);
     // Set requested to false
     reduceChickens.requested = false;
     // Reduce the chickens
     reduceChickens();
+  } else {
+    console.log('Reduction request not detected.');
   }
+  console.log('Continuing to next interval...');
 }, config.reductionDT);
 
 // Export the routes as an unnamed object
