@@ -157,10 +157,10 @@ function reduceChickens() {
   var mapReduce = {};
   // Create the map function (name -> ckn)
   mapReduce.map = function() {
-    emit(this.name, this);
+    emit(this.chickenName, this);
   }
-  // Create the reduce function (Only return the latest ckn objects)
-  mapReduce.reduce = function(name, chickens) {
+  // Create the reduce function (Only return the latest chicken objects)
+  mapReduce.reduce = function(chickenName, chickens) {
     // Iterate through the chickens, searching for the latest chicken
     // We're assuming it was a min heap (implemented as array it would be at the last index)
     var latest = chickens[chickens.length - 1];
@@ -222,7 +222,7 @@ reduceChickens.reducing = false
 
 // Create an interval for the chickens to be reduced on
 var reductionInterval = setInterval(() => {
-  console.log('Checking for reduction requests...')
+  //console.log('Checking for reduction requests...')
   // Check if a reduce has been requested and one is not currently running
   if (reduceChickens.requested && !reduceChickens.reducing) {
     console.log(`Reduction request detected!
@@ -232,9 +232,9 @@ var reductionInterval = setInterval(() => {
     // Reduce the chickens
     reduceChickens();
   } else {
-    console.log('Reduction request not detected.');
+    //console.log('Reduction request not detected.');
   }
-  console.log('Continuing to next interval...');
+  //console.log('Continuing to next interval...');
 }, config.reductionDT);
 
 // Export the routes as an unnamed object

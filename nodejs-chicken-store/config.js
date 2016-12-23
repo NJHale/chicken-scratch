@@ -41,7 +41,7 @@ config.mongoOptions = {
 };
 
 // Set reductionDT
-config.reductionDT = process.env.REDUCTION_DT || 1000;
+config.reductionDT = process.env.REDUCTION_DT || 2500;
 
 // Export the config object as unnamed
 module.exports = config;
