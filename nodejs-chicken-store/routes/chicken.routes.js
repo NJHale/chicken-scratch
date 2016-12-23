@@ -126,13 +126,14 @@ routes.post('/chickens', (req, res) => {
     var ckn = new Chicken(req.body);
     console.log('Finalized chicken: ' + JSON.stringify(ckn));
     // Insert the Chicken into the store
-    //TODO: Add type checking to ensure we are putting in our base Chicken prototype (at least)
     ckn.save((err, ckn) => {
       if (err != null) {
         console.log(`An error was detected when saving the chicken: ${err}`)
         // Return an error
         res.status(400).json(JSON.stringify(err));
       } else {
+        // Flip the requested flag
+        reduceChickens.requested = true;
         // Change status to 201 "Created"
         res.status(201).send();
       }
