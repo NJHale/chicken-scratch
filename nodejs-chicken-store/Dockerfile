@@ -8,7 +8,10 @@ USER root
 WORKDIR /app
 
 # Copy nodejs source code
-COPY . .
+COPY routes routes
+COPY schemas schemas
+COPY config.js config.js
+COPY server.js
 
 # Copy package.json and install app dependencies
 COPY package.json package.json
