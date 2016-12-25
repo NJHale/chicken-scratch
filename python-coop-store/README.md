@@ -1,12 +1,12 @@
-# nodejs-chicken-store
+# python-coop-store
 
-Simple REST service for chickens and accompanying models
+Simple REST service for coops and accompanying models
 
 ## Docker Image
 
 
 A Docker container image for this service can be built by issuing a
-`docker build ../nodejs-chicken-store` from the root git repository
+`docker build ../nodejs-coop-store` from the root git repository
 
 ## Deployment on OpenShift
 
@@ -15,7 +15,7 @@ this microservice relative to the chicken-scratch project's root.
 
 
 Once the template has been instantiated via the OpenShift Web Console, running
-`oc start-build nodejs-chicken-store --from-repo=../nodejs-chicken-store --follow --wait`
+`oc start-build nodejs-coop-store --from-repo=../nodejs-coop-store --follow --wait`
 will stream the current subdirectory of the latest git repo commit as binary to
 an OpenShift build container.
 
