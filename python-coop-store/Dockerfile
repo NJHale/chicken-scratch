@@ -12,7 +12,7 @@ WORKDIR /app
 COPY . .
 
 # Install python dependencies
-RUN pip install -r requirements.txt
+RUN chmod 777 /app && pip install -r requirements.txt 
 
 # Expose the app port
 EXPOSE 8080
