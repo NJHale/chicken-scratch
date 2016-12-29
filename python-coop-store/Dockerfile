@@ -9,7 +9,7 @@ WORKDIR /app
 
 # TODO: Only copy required stuff
 # Copy everything
-COPY * ./
+COPY . .
 
 # Install python dependencies
 RUN pip install -r requirements.txt
@@ -21,4 +21,4 @@ EXPOSE 8080
 USER 1001
 
 # Define the python app as the container's entrypoint (process 1)
-ENTRYPOINT ["python", "coops.py"]
+ENTRYPOINT ["python", "coop.py"]
