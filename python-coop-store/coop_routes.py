@@ -8,8 +8,7 @@ from flask_pymongo import PyMongo
 app = Flask(__name__)
 
 # Get mongodb configurations
-app.config['MONGO_DBNAME'] = 
-    os.getenv('MONGO_DBNAME', 'coopdb')
+app.config['MONGO_DBNAME'] = os.getenv('MONGO_DBNAME', 'coopdb')
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/restdb'
 
 mongo = PyMongo(app)

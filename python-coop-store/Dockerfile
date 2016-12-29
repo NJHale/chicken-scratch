@@ -21,4 +21,4 @@ EXPOSE 8080
 USER 1001
 
 # Define the python app as the container's entrypoint (process 1)
-ENTRYPOINT ["python", "coop.py"]
+ENTRYPOINT ["python", "coop_routes.py"]
