@@ -60,4 +60,4 @@ if __name__ == "__main__":
         'PYTHON_COOP_STORE_SERVICE_HOST','localhost',
         port=8080
     )
-    # app.run(host='localhost',port=8080)
+# app.run(host='localhost',port=8080)
