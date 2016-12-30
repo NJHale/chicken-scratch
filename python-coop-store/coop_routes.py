@@ -56,8 +56,7 @@ def hello():
     return "Hello World!"
 
 if __name__ == "__main__":
-    app.run(host=os.getenv(
-        'PYTHON_COOP_STORE_SERVICE_HOST','localhost',
+    app.run(
+        host=os.getenv('PYTHON_COOP_STORE_SERVICE_HOST','localhost'),
         port=8080
     )
-# app.run(host='localhost',port=8080)
