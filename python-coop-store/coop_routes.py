@@ -49,7 +49,6 @@
 #             port=int(os.getenv('PYTHON_COOP_STORE_SERVICE_PORT_HTTP', 8080)))
 
 from flask import Flask
-import os
 app = Flask(__name__)
 
 @app.route("/")
@@ -57,7 +56,4 @@ def hello():
     return "Hello World!"
 
 if __name__ == "__main__":
-    app.run(
-        host=os.getenv('IP','localhost'),
-        port=8080
-    )
+    app.run(host='0.0.0.0',port=8080)
