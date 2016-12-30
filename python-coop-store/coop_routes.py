@@ -49,6 +49,7 @@
 #             port=int(os.getenv('PYTHON_COOP_STORE_SERVICE_PORT_HTTP', 8080)))
 
 from flask import Flask
+import os
 app = Flask(__name__)
 
 @app.route("/")
