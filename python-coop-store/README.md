@@ -2,6 +2,10 @@
 
 Simple REST service for coops and accompanying models
 
+## Development Environment
+
+[Stuff about pip here]
+
 ## Docker Image
 
 
