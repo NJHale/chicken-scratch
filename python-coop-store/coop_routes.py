@@ -58,6 +58,6 @@ def hello():
 
 if __name__ == "__main__":
     app.run(
-        host=os.getenv('PYTHON_COOP_STORE_SERVICE_HOST','localhost'),
+        host=os.getenv('IP','localhost'),
         port=8080
     )
