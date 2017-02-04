@@ -89,5 +89,5 @@ func main() {
 	wireRouter(router, session)
 
 	// Fire up the http server and log the results
-	log.Fatal(http.ListenAndServe("localhost", router))
+	log.Fatal(http.ListenAndServe("localhost:8080", router))
 }
