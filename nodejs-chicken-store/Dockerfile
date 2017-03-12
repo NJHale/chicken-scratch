@@ -15,7 +15,8 @@ COPY server.js server.js
 
 # Copy package.json and install app dependencies
 COPY package.json package.json
-RUN npm install
+RUN npm install &&
+    chmod 755 -R /app
 
 # Expose the app port
 EXPOSE 8080
