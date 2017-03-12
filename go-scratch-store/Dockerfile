@@ -10,7 +10,7 @@ RUN go get && go build
 # Elevate and change permissions on the compiled go binary
 USER root
 # Give read and execute to all
-RUN chmod 555 go-scratch-store
+RUN chmod 755 go-scratch-store
 # Switch to un-privileged user
 USER 1001
 
